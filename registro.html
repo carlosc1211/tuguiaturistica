@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    
+    <link rel="shortcut icon" href="assets/images/logo1.png" type="image/x-icon">
+    <title>Registro Tu Guia Turistica</title>
+    <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/mobirise/css/styles.css" type="text/css">
+    <meta name="google-signin-client_id" content="572872546271-e7m2m2kik4cgh582s3eeqsbtebhs7c44.apps.googleusercontent.com">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129777638-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129777638-1');
+    </script>
+</head>
+
+<body>
+    <div class="container" id="registration-form">
+        <!--div class="image"></div-->
+        <div class="frm">
+            <h1>Registro</h1>
+            <div id="my-signin2"></div>
+            <script>
+              function onSuccess(googleUser) {
+                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+              }
+              function onFailure(error) {
+                console.log(error);
+              }
+              function renderButton() {
+                gapi.signin2.render('my-signin2', {
+                  'scope': 'profile email',
+                  'width': 240,
+                  'height': 50,
+                  'longtitle': true,
+                  'theme': 'dark',
+                  'onsuccess': onSuccess,
+                  'onfailure': onFailure
+                });
+              }
+            </script>
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+            <form action="php/insert/insert.php" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Introduzca su nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Introduzca su apellido">
+                </div>
+                <div class="form-group">
+                    <label for="identidad">Documento de Identidad:</label>
+                    <input name="identidad" type="text" class="form-control" id="identidad" placeholder="Introduzca su doc. Identidad">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Telefono de contacto:</label>
+                    <input name="telefono" type="text" class="form-control" id="telefono" placeholder="Introduzca su telefono">
+                </div>
+                <div class="form-group">
+                    <label for="correo">Email:</label>
+                    <input name="correo" type="email" class="form-control" id="correo" placeholder="Introduzca su correo">
+                </div>
+                <div class="form-group">
+                    <label for="pass">Password:</label>
+                    <input name="pass" type="password" class="form-control" id="pass" placeholder="Introduzca su contraseña">
+                </div>
+                <div class="g-recaptcha" data-callback="enableBtn" data-sitekey="6LcJ9HwUAAAAAC6PilyCGI1RwKftroxEJSwbYDg9"></div>
+                <br>
+                <!--div class="container" style="text-align:center">
+                        <button disabled="disabled" id="BotonSend" onclick="enviar()" type="button" class="btn btn-outline-primary">Enviar</button>
+                    </div-->
+                <div class="form-group">
+                    <button type="submit" disabled="disabled" onclick="enviar()" id="BotonSend" class="btn btn-success btn-lg">Registrarse</button>
+                    <a href="index.html"><button type="button" id="BotonSend" class="btn btn-success btn-lg">Regresar</button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+        <script src="assets/js/envia.js"></script>
+        <script src="assets/js/activarbutton.js"></script>
+</body>
+</html>

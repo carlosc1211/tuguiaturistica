@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+		<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m,sap.ui.table,sap.ui.commons"
+				data-sap-ui-theme="sap_bluecrystal">
+		</script>
+		<!-- only load the mobile lib "sap.m" and the "sap_bluecrystal" theme -->
+
+		<script>
+		
+		var json = new sap.ui.model.json.JSONModel();
+		$.ajax({
+            url: 'php/conexiones/usuario.php',
+            async:false,        
+            success: function(data){
+                console.log("Data", data)
+                json.setData(JSON.parse(data));
+            },
+            error: function(err)
+            {
+                console.log(err);
+		    }
+		});
+		
+
+		var tableo = new sap.ui.table.Table({
+			title		:	"Arjun's First Table",
+			visibleRowCount	: 5
+		});
+		tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"ID"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","ID"),
+			width : "140px"
+		}));
+		tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Nombre"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","nombre"),
+			width : "140px"
+		}));
+		tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Apellido"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","apellido"),
+			width : "140px"
+		}));
+		tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Identidad"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","identidad"),
+			width : "140px"
+        }));
+        tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Telefono"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","telefono"),
+			width : "140px"
+        }));
+        tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Correo"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","correo"),
+			width : "140px"
+        }));
+        tableo.addColumn(new sap.ui.table.Column({
+			label : new sap.ui.commons.Label({text:"Pass"}),
+			template : new sap.ui.commons.TextField().bindProperty("value","pass"),
+			width : "140px"
+		}));
+		
+		tableo.setModel(json)
+		tableo.bindRows("/result");
+		tableo.placeAt("content");
+		
+		
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>
